@@ -1,0 +1,130 @@
+.reading{ 
+    margin-left: 18.6rem;
+    display: flex;
+    
+}
+
+.data-display{
+    flex-basis: 70%;
+    margin-top: 1rem;
+    margin-left: 2rem;
+   
+}
+
+ .summary{
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4rem;
+    height: 13rem;
+    background: white;
+}
+
+.checkout, .finished-task, .notes-num {
+    border: 1px #c1c1c1 solid;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    height: 8rem;
+    width: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkout:hover, .finished-task:hover, .notes-num:hover{
+    background: #ff7373;
+}
+
+.num{
+    font-size: 1.1rem;
+    text-align: center;
+    padding-top: 0.5rem;
+}
+
+.word{
+    margin-top: 1rem;
+}
+
+.booklist{
+    position: fixed;
+    right: 0;
+    height: 99vh;
+    margin-left: 2rem;
+    margin-top: 1vh;
+    background: white;
+    width: 15rem;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.chart-pic{
+   display: flex;
+   margin-top: 1.5rem;
+   background: white;
+}
+
+.pie{
+   margin-top:6rem;
+   margin-left: 3rem;
+}
+
+#myChart{
+  margin-top: 3rem;
+  background: white;
+}
+
+.daily-say{
+    background: white;
+    margin-top: 2rem;
+    padding: 2rem 0.5rem;
+}
+
+.daily-each{
+    background: #e6e6fa;
+    padding: 0.9rem;
+    border-radius: 8px;
+    font-size: 80%;
+    position: relative;
+}
+
+.date-today{
+    margin-bottom: 0.8rem;
+}
+.daily-book{
+    position: absolute;
+    right: 0.5rem;
+    bottom: 1rem;
+
+}
+.daily-note{
+    margin-bottom: 0.6rem;
+}
+
+.booklist-ol li{
+    margin-top: 1.5rem;
+}
+
+.booklist h2{
+    color: #008080;
+    margin-bottom: 2.3rem;
+}
+
+.read-btn{
+    position: absolute;
+    background:#ffc0cb;
+    width: 3rem;
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    border-radius: 0 100px 100px 0;
+    opacity: 0.8;
+    top: 20rem;
+    font-size: 80%;
+}
+
+.read-btn div{
+  margin-left: 5px;
+}
+
