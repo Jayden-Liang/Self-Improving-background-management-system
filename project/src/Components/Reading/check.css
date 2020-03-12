@@ -29,6 +29,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .checkout:hover, .finished-task:hover, .notes-num:hover{
@@ -46,6 +47,7 @@
 }
 
 .booklist{
+
     position: fixed;
     right: 0;
     height: 99vh;
@@ -56,6 +58,7 @@
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
+    background-color: #ffe4e1;
 
 }
 
@@ -103,7 +106,8 @@
 }
 
 .booklist-ol li{
-    margin-top: 1.5rem;
+    margin-top: 1rem;
+    font-size: 90%;
 }
 
 .booklist h2{
@@ -114,14 +118,15 @@
 .read-btn{
     position: absolute;
     background:#ffc0cb;
-    width: 3rem;
-    height: 6rem;
+    width: 2rem;
+    height: 4rem;
     display: flex;
     align-items: center;
     border-radius: 0 100px 100px 0;
     opacity: 0.8;
     top: 20rem;
-    font-size: 80%;
+    font-size: 70%;
+    /* color: white; */
 }
 
 .read-btn div{
