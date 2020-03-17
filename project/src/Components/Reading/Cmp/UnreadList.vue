@@ -16,7 +16,7 @@
 .read{
     
     height: 99vh;
-    overflow:scroll;
+    /* overflow:scroll; */
 }
 
 </style>

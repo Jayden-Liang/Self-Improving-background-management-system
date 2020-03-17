@@ -1,11 +1,13 @@
 .reading{ 
-    margin-left: 18.6rem;
-    display: flex;
+    margin-left: 300px;
+    /* display: flex; */
+    margin-right: 290px;
+    /* z-index: 1000; */
     
 }
 
 .data-display{
-    flex-basis: 70%;
+    /* flex-basis: 70%; */
     margin-top: 1rem;
     margin-left: 2rem;
    
@@ -47,14 +49,17 @@
 }
 
 .booklist{
-
-    position: fixed;
-    right: 0;
+    
+    /* flex-basis: 300px; */
+    position: absolute;
+    top: 0px;
+    right: 10px;
     height: 99vh;
     margin-left: 2rem;
+    width: 250px;
     margin-top: 1vh;
     background: white;
-    width: 15rem;
+    /* width: 15rem; */
     border-radius: 10px;
     text-align: center;
     cursor: pointer;

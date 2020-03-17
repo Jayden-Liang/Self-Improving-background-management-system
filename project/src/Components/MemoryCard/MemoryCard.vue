@@ -1,5 +1,15 @@
 <template>
-    <div class='card' :style='cardStyle'> 
+    <div class='card' > 
+        <nav class='navBar'>
+            <div>Memory card</div>
+            <ul>
+                <li>数据统计</li>
+                <li>添加</li>
+            </ul>
+        </nav>
+      
+        
+       
        <div class='each'>
            <h3>问题一</h3>
            <div class='question'>
@@ -9,6 +19,10 @@
                <button class='button'>答案</button>
            </div>
        </div>
+
+       <div class='slogan'>
+          <h1>温故而知新</h1>
+       </div>
     </div>
 </template>
 
@@ -17,7 +31,7 @@ export default {
     
     data: function(){
         return {
-
+         
         }
     }
 
@@ -25,28 +39,56 @@ export default {
 </script>
 
 <style  scoped>
-.card{
-    height: 100vh;
-    margin-top: 0;
-    /* margin-left: 18.6rem; */
+
+.navBar{
+    background: #2EA3FD;
+    width: 100%;
+    height: 100px;
     display: flex;
+}
+.navBar div:first-child{
+    flex: 2;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.6rem;
+}
+.navBar ul{
+    flex: 1;
+    margin-top: 40px;
+}
+.navBar ul li{
+ list-style: none;
+ display: inline-block;
+ margin-left: 20px;
+ color: white;
+
+}
+.card{
+    /* height: 100vh; */
+    margin-top: 0;
+    margin-left: 300px;
+    /* margin-left: 18.6rem; */
+    
     /* justify-content: center; */
     /* margin-top: 5rem; */
     /* background: yellow; */
-    background: url('../../assets/fogs-on-green-mountain.jpg');
+    /* background: url('../../assets/fogs-on-green-mountain.jpg'); */
     background-size: cover;
     
 }
 
 .each{
     padding: 1rem;
-    height: 20rem;
-    margin-top: 5rem;
+    margin: auto;
+    margin-top: 10rem;
     width: 40rem;
-    margin-left: 35rem;
     /* border: 1px #cccccc solid; */
-    background: url('../../assets/bg-card/bg-2.jpg');
-    background-size: contain;
+    box-shadow: 1px 1px 10px #ccc;
+    /* border-radius: 5px; */
+    /* margin-left: 35rem; */
+    /* border: 1px #cccccc solid; */
+    /* background: url('../../assets/bg-card/bg-2.jpg'); */
+    /* background-size: contain; */
    
 }
 .each h3{
@@ -77,6 +119,14 @@ export default {
 
 .button:hover{
     background: #6DFD9C;
+}
+
+.slogan{
+    text-align: center;
+    font-family:'lixukexingshu1f8ea482aa1e86d';
+    margin-top: 5rem;
+    letter-spacing:10px;
+    font-size: 4rem;
 }
 </style>
 

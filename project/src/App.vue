@@ -17,12 +17,9 @@ export default {
 </script>
 
 <style>
-html, body{
-  margin: 0;
-  padding: 0;
-  background: #F9FAFB;
-  font-family: "Noto Sans SC";
-  color: #5b5b5b;
-}
+@import './App.css';
+
+
+
 
 </style>

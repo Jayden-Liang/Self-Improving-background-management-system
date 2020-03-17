@@ -1,9 +1,7 @@
 <template>
   <div class="reading">
-      <div></div>
       <Modal :showModal='showModal'/>
-      <dailyNote v-on:childByValue="name=$event"/>
-      <div>{{name}}</div>
+      <dailyNote/>
 
     <div class="data-display">
       <div class="summary">
@@ -178,7 +176,7 @@ export default {
       opacity: 0;
       transition: opacity 0.3s;
   }
-  @keyframes slide-in {
+  /* @keyframes slide-in {
       from {
           transform: translateX(100px);
       }
@@ -193,7 +191,7 @@ export default {
       to {
           transform: translateX(100px);
       }
-  }
+  } */
 
 </style>
 </style>

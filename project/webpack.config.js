@@ -36,6 +36,14 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+         test:/\.(ttf|otf|eot|woff|woff2|svg)$/,
+         use:['file-loader']
+      },
+      {
+          test: /\.css$/,
+          use:['style-loader','css-loader']
       }
     ]
   },

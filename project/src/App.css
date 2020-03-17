@@ -1,0 +1,15 @@
+
+
+@font-face {
+    font-family: 'SourceHanSansCN-Normal-2';
+    src: url('./assets/SiYuanHeiTi-Normal/SourceHanSansCN-Normal-2.otf');  
+   }
+
+   html, body{
+    margin: 0;
+    padding: 0;
+    background: #F9FAFB;
+    /* font-family: "Noto Sans SC"; */
+    font-family: 'SourceHanSansCN-Normal-2';
+    color: #5b5b5b;
+  }

@@ -157,7 +157,7 @@ export default {
   font-size: 1.2rem;
   border: 1px #cccc solid;
   height: 100%;
-  width: 18rem;
+  width: 300px;
   top: 0;
   background: white;
 }
