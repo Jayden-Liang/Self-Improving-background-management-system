@@ -19,7 +19,4 @@ export default {
 <style>
 @import './App.css';
 
-
-
-
 </style>

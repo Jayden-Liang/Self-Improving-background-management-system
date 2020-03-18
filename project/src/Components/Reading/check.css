@@ -1,13 +1,10 @@
 .reading{ 
     margin-left: 300px;
-    /* display: flex; */
     margin-right: 290px;
-    /* z-index: 1000; */
     
 }
 
 .data-display{
-    /* flex-basis: 70%; */
     margin-top: 1rem;
     margin-left: 2rem;
    

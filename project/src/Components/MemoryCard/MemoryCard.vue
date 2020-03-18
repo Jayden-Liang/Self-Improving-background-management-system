@@ -8,18 +8,12 @@
             </ul>
         </nav>
       
-        
-       
-       <div class='each'>
-           <h3>问题一</h3>
-           <div class='question'>
-                添加背景图片backgound-image
-           </div>
-           <div class='answer'>
-               <button class='button'>答案</button>
-           </div>
-       </div>
-
+         <div class='cardiv'>
+            <transition name='rotate' mode='out-in'>
+                <component :is='currentCmp' :callback='shiftCmp'></component>
+            </transition>
+         </div>
+           
        <div class='slogan'>
           <h1>温故而知新</h1>
        </div>
@@ -27,11 +21,28 @@
 </template>
 
 <script>
+import question from './childcmp/question.vue'
+import answer from './childcmp/answer.vue'
 export default {
-    
+    components:{
+        question,
+        answer
+    },
     data: function(){
         return {
-         
+           currentCmp: 'question',
+           buttonText:'答案'
+        }
+    },
+    methods:{
+        shiftCmp(el){
+            if (el==='answer'){
+                this.currentCmp='answer'
+                this.buttonText='返回'
+            }else{
+                this.currentCmp='question'
+                this.buttonText='答案'
+            }
         }
     }
 
@@ -39,6 +50,28 @@ export default {
 </script>
 
 <style  scoped>
+.rotate-enter-active{
+    animation: jump-in 0.3s ease-out forwards;
+}
+
+.rotate-leave-active{
+    animation: jump-out 0.3s ease-out forwards;
+}
+
+@keyframes jump-in {
+    from {
+        transform: rotateY(90deg);
+    }to{
+        transform: rotateY(0deg);
+    }
+}
+@keyframes jump-out {
+    from {
+        transform: rotateY(0deg);
+    }to{
+        transform: rotateY(90deg);
+    }
+}
 
 .navBar{
     background: #2EA3FD;
@@ -64,62 +97,18 @@ export default {
 
 }
 .card{
-    /* height: 100vh; */
     margin-top: 0;
     margin-left: 300px;
-    /* margin-left: 18.6rem; */
-    
-    /* justify-content: center; */
-    /* margin-top: 5rem; */
-    /* background: yellow; */
-    /* background: url('../../assets/fogs-on-green-mountain.jpg'); */
     background-size: cover;
     
 }
 
-.each{
-    padding: 1rem;
-    margin: auto;
-    margin-top: 10rem;
-    width: 40rem;
-    /* border: 1px #cccccc solid; */
-    box-shadow: 1px 1px 10px #ccc;
-    /* border-radius: 5px; */
-    /* margin-left: 35rem; */
-    /* border: 1px #cccccc solid; */
-    /* background: url('../../assets/bg-card/bg-2.jpg'); */
-    /* background-size: contain; */
-   
-}
-.each h3{
-    margin-left: 1rem;
+
+.cardiv{
+    /* border: 1px red solid; */
+    min-height: 300px;
 }
 
-.question{
-    margin-top: 3rem;
-    text-align: center;
-    font-size: 150%;
-}
-.answer{
-    text-align: center;
-    margin-top: 4rem;
-    /* margin-bottom: 1rem; */
-}
-
-.button{
-  padding: 5px 35px;
-  border-radius: 20px;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  background: #699CFC;
-  margin-bottom: 1rem;
-  color: white;
-}
-
-.button:hover{
-    background: #6DFD9C;
-}
 
 .slogan{
     text-align: center;
