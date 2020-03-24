@@ -6,11 +6,16 @@ import { routes } from './router'
 import { store } from './store/store'
 import CKEditor from 'ckeditor4-vue';
 
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
 
 
 Vue.component('side-bar', SideBar);
 Vue.use(VueRouter);
 Vue.use( CKEditor );
+
+Vue.use(ElementUI);
 
 
 const router = new VueRouter({

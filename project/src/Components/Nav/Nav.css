@@ -1,0 +1,182 @@
+.phone-area{
+    height: 60px;
+    width: 100%;
+    background: #F5F5F5;
+    display: flex;
+    border: 1px transparent solid;
+    margin-top: 3rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+.password-area{
+    height: 60px;
+    width: 100%;
+    background: #F5F5F5;
+    margin-top: 2rem;
+    display: flex;
+    border: 1px transparent solid;
+    border-radius: 5px;
+    padding: 0 30px 0 10px;
+}
+
+.phone-area:hover{
+    border: 1px #cccc solid;
+    transition: all 0.3s ease;
+}
+
+.phoneAreaActive{
+    background-color: white;
+    border: 1px #cccc solid;
+}
+
+.area-code{
+    display: inline-block;
+    flex-basis: 10%;
+    align-self: center;
+    padding: 10px;
+}
+/* .area-code::after{
+    content: 'hello';
+} */
+
+.phone-area input{
+    display: inline-block;
+    flex-basis: 85%;
+    background-color: #F5F5F5;
+    border: none;
+    
+    transition: all 0.3s ease;
+}
+
+.phone-area input:focus{
+  border: none;
+  outline: none;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.password-area input{
+    display: inline-block;
+    flex-basis: 85%;
+    background-color: #F5F5F5;
+    border: none;
+    
+}
+.password-area:hover{
+    border: 1px #cccc solid;
+    transition: all 0.3s ease;
+}
+
+.password-area input:focus{
+    border: none;
+    outline: none;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.pwdCheckbox{
+    align-self: center;
+   
+
+    
+}
+
+.passwordAreaActive{
+    background-color: white;
+    border: 1px #cccc solid;
+    transition: all 0.3s ease;
+
+}
+
+.el-checkbox__inner{
+    border-radius: 50%;
+}
+
+.login-register{
+    display: flex;
+    margin-top: 3rem;
+    
+}
+
+.login-register div:first-child{
+    flex-basis: 70%;
+    cursor: pointer;
+    margin-top: 6px;
+}
+
+.lr-button{
+    /* border: 1px red solid; */
+    flex-basis: 30%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+.lr-button button{
+    width: 60px;
+    height: 30px;
+    border-radius: 20px;
+    border:none;
+    color: #655e5e;
+    outline: none;
+   
+}
+
+.lr-button button:first-child{
+    background-color: #F5F5F5;
+}
+.lr-button button:last-child{
+    background-color: #F5F5F5;
+    color:#D7191A;
+}
+
+.divider{
+    margin-top: 1rem;
+    width: 90%;
+    margin: auto;
+    border-bottom: 1px #e5e5e5 solid;
+    /* height: 1px;
+    background: #e5e5e5; */
+}
+
+.other-methods{
+    margin: auto;
+    
+
+}
+.other-methods-text{
+  text-align: center;
+  width: 100px;
+  margin: auto;
+}
+.icon-group{
+    margin: auto;
+    margin-top: 1rem;
+}
+.mail, .wechat, .weibo{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: inline-block;
+  /* margin-left: 30px; */
+}
+.icon-group div:not(:first-child){
+ margin-left: 20px;
+}
+
+.wechat{
+    background-color: #00DF6C;
+}
+.mail{
+    background-color: #57C2FF;
+}
+.weibo{
+    background-color: #E6172D;
+}
+.icon-group .icon{
+    height: 30px;
+    width: 30px;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+
+}

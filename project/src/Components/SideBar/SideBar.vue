@@ -53,7 +53,7 @@
       </div>
       <div>卡片</div>
     </div>
-    <div class="each">
+    <div class="each" @click='navigateToMovie'>
       <div>
         <svg
           t="1580827691930"
@@ -146,6 +146,9 @@ export default {
     },
     navigateToCard(){
         this.$router.push('/card').catch(err => {})
+    },
+    navigateToMovie(){
+        this.$router.push('/movie').catch(err => {})
     }
   }
 };

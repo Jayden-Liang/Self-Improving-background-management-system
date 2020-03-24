@@ -31,6 +31,10 @@
     cursor: pointer;
 }
 
+.checkout{
+    border: none;
+    background-color: #A0CFFF;
+}
 .checkout:hover, .finished-task:hover, .notes-num:hover{
     background: #ff7373;
 }

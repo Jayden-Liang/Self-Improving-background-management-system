@@ -1,13 +1,19 @@
 <template>
   <div class="reading">
-      <Modal :showModal='showModal'/>
-      <dailyNote/>
+    <!-- <Modal :showModal="showModal" /> -->
 
     <div class="data-display">
       <div class="summary">
-        <div class="checkout" @click='checkout'>
-          <div>打卡</div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary checkout"
+            data-toggle="modal"
+            data-target="#exampleModalCenter"
+          >打卡</button>
+          
         </div>
+        
         <div class="finished-task">
           <div>
             <div class="word">已读</div>
@@ -37,18 +43,65 @@
           <div class="daily-book">《思考.快与慢》</div>
         </div>
       </div>
-    </div>
+
+      
 
     <div class="booklist">
-      <div class="read-btn" @click='shifCmp'>
+      <div class="read-btn" @click="shifCmp">
         <div>{{buttonText}}</div>
       </div>
-       <!-- <UnreadList /> -->
-       <transition name='slide' mode='out-in'>
-       <component :is='selectedCmp'></component>
-       </transition>
-      
-      
+      <!-- <UnreadList /> -->
+      <transition name="slide" mode="out-in">
+        <component :is="selectedCmp"></component>
+      </transition>
+    </div>
+
+
+    <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModalCenter"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">今日阅读</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="block mt-2">
+                <el-date-picker v-model="value1" type="date" placeholder="选择日期"></el-date-picker>
+              </div>
+              <el-input
+                class="mt-4"
+                type="textarea"
+                :autosize="{ minRows: 2, maxRows: 4}"
+                placeholder="请输入内容"
+                v-model="textarea2"
+              ></el-input>
+
+              <el-select class="mt-4" v-model="value" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
+            </div>
+            <div class="modal-footer">
+              <el-button plain data-dismiss="modal">取消</el-button>
+              <el-button type="success" plain data-dismiss="modal">提交</el-button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -57,41 +110,89 @@
 import Chart from "chart.js";
 import ReadList from "./Cmp/ReadList.vue";
 import UnreadList from "./Cmp/UnreadList.vue";
-import Modal from '../Modal.vue';
-import dailyNote from './Cmp/dailyNote.vue'
+import dailyNote from "./Cmp/dailyNote.vue";
 
 export default {
   components: {
     ReadList: ReadList,
     UnreadList: UnreadList,
-    Modal,
     dailyNote
   },
-  data: function(){
-      return {
-          selectedCmp:'ReadList',
-          buttonText: '已读',
-          showModal: true,
-          addNote: true,
-          name:''
-      }
-  },
-  methods:{
-    shifCmp(){
-        if (this.selectedCmp=='ReadList'){
-           this.selectedCmp='UnreadList'
-           this.buttonText='未读'
-        }else{
-            this.selectedCmp='ReadList'
-            this.buttonText='已读'
+  data: function() {
+    return {
+      selectedCmp: "ReadList",
+      buttonText: "已读",
+      showModal: true,
+      addNote: true,
+      name: "",
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
+        shortcuts: [
+          {
+            text: "今天",
+            onClick(picker) {
+              picker.$emit("pick", new Date());
+            }
+          },
+          {
+            text: "昨天",
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24);
+              picker.$emit("pick", date);
+            }
+          },
+          {
+            text: "一周前",
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit("pick", date);
+            }
+          }
+        ]
+      },
+      options: [
+        {
+          value: "选项1",
+          label: "美国众神"
+        },
+        {
+          value: "选项2",
+          label: "三国演义(听书)"
+        },
+        {
+          value: "选项3",
+          label: "思考.快与慢"
+        },
+        {
+          value: "选项4",
+          label: "盐糖脂"
+        },
+        {
+          value: "选项5",
+          label: "半小时漫画经济学"
         }
-    },
-    checkout(){
-        this.$store.dispatch('ayncModal')
+      ],
+      value: "美国众神",
+      value1: "",
+      value2: "",
+      textarea2: ""
+    };
+  },
+  methods: {
+    shifCmp() {
+      if (this.selectedCmp == "ReadList") {
+        this.selectedCmp = "UnreadList";
+        this.buttonText = "未读";
+      } else {
+        this.selectedCmp = "ReadList";
+        this.buttonText = "已读";
+      }
     }
-    // ...mapActions([
-    //   'ayncModal'
-    // ])
+
   },
   mounted() {
     let myChart = document.querySelector("#myChart").getContext("2d");
@@ -160,23 +261,22 @@ export default {
 </script>
 
 <style scoped>
-@import "./check.css";
-<style>
-  .slide-enter{
-      opacity: 0;
-  }
-  .slide-enter-active{
-      animation: slide-in 1s ease-out forwards;
-      transition: opacity 1s;
-  }
-  .slide-leave{
-  } 
-  .slide-leave-active{
-      animation: slide-out 0.3s ease-in forwards;
-      opacity: 0;
-      transition: opacity 0.3s;
-  }
-  /* @keyframes slide-in {
+@import "./Reading.css";
+<style > .slide-enter {
+  opacity: 0;
+}
+.slide-enter-active {
+  animation: slide-in 1s ease-out forwards;
+  transition: opacity 1s;
+}
+.slide-leave {
+}
+.slide-leave-active {
+  animation: slide-out 0.3s ease-in forwards;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+/* @keyframes slide-in {
       from {
           transform: translateX(100px);
       }
@@ -192,6 +292,5 @@ export default {
           transform: translateX(100px);
       }
   } */
-
 </style>
 </style>

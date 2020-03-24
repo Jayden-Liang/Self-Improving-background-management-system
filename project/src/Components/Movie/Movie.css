@@ -1,0 +1,275 @@
+.movie {
+    margin-left: 300px;
+  }
+  
+
+
+  
+  .carousel-indicators li{
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      margin-left: 30px;
+      margin-bottom: 3rem;
+  }
+  
+  .carousel-control-prev-icon{
+      border: 1px red solid;
+      padding: 5px;
+      border-radius: 50%;
+  }
+  
+  .prev, .next{
+      height: 40px;
+      width: 40px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: white;
+  
+  }
+  .el-icon-arrow-left,.el-icon-arrow-right{
+      color: brown;
+      font-size:1.5rem;
+  }
+  
+  .mini-card{
+    background-size: cover;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .mini-card div{
+    width: 18rem;
+    height: 9rem;
+    transition: all 0.3s ease ;
+    cursor: pointer;
+  }
+  
+  .card-1{
+    background: url('../../assets/movie-bg-sm/movie-bg-sm-1.jpg') center;
+    background-size: cover;
+    width: 18rem;
+    height: 9rem;
+    transition: all 0.3s ease ;
+  }
+  .mini-card div:hover{
+    transform: scale(1.1);
+    transition: all 0.3s ease ;
+  }
+  .card-2{
+    background: url('../../assets/movie-bg-sm/movie-bg-sm-2.png') center;
+    background-size: cover;
+  }
+  .card-3{
+    background: url('../../assets/movie-bg-sm/movie-bg-sm-3.jpg') center;
+    background-size: cover;
+  }
+  .card-4{
+    background: url('../../assets/movie-bg-sm/movie-bg-sm-4.png') center;
+    background-size: cover;
+  }
+  
+  .main-sec{
+    max-width: 1200px;
+    margin: auto;
+    
+    /* border: 1px red solid; */
+  }
+  .column-4{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: -3rem;
+    z-index: 1000;
+  }
+  
+  
+  /* .selects{
+    position: absolute;
+    top
+  } */
+  .selects ul{
+    padding-left: 0;
+  
+  }
+  
+  .selects ul li{
+    display: inline-block;
+    list-style: none;
+    padding: 0 1rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  
+.movie-intro{
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.movie-pic{
+    overflow: hidden;
+    flex-basis: 50%;
+}
+
+  .movie-pic img{
+    width: 400px;
+    transition: all 0.3s ease ;
+    
+  }
+
+  .movie-intro a{
+    text-decoration: none;
+  }
+  
+  
+.movie-brief{
+    /* position: absolute;
+    top: 0;
+    left: 430px; */
+    /* width: 400px; */
+    flex-basis: 50%;
+    height: 200px;
+    background-color: white;
+    padding: 2rem;
+    transition: all 0.3s ease ;
+
+}  
+/* .brief-inner{
+    margin-left: 2rem;;
+} */
+.movie-title{
+    font-size: 1.4rem;
+    font-weight: bold;
+    color:#000000;
+    width: 320px;
+    
+}
+
+.movie-intro:hover > .movie-pic img{
+    transform: scale(1.1);
+    flex-basis: 45%;
+    transition: all 0.3s ease ;
+
+}
+
+.movie-intro:hover > .movie-brief{
+    flex-basis: 55%;
+    padding-left: 1rem;
+    /* transition: all 0.1s ease ; */
+}
+
+/* .movie-intro:hover > .brief-inner{
+    margin-left: 1rem;
+} */
+.catagory{
+  margin-top: 50px;
+}
+.catagory div:last-child{
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  color: #800080;
+}
+.icon{
+  height: 40px;
+  width: 40px;
+  
+}
+
+.tag-and-date{
+  
+  position: relative;
+}
+
+.myDate{
+   position: absolute;
+   left: 250px;
+   top: 12px;
+   font-size: 0.8rem;
+   color: #800080;
+}
+
+.myMovieList{
+ width: 100%;
+ height: 120px;
+ background: url('../../assets/myMovieList.jpg');
+}
+
+.right-sec{
+  
+  margin-left: 88px;
+  padding: 0;
+}
+
+.wish-list,.recent-view{
+  background: white;
+ 
+}
+
+
+.wish-list-title,.recent-review-title{
+  padding: 0.5rem ;
+  border-bottom: 1px #E0E0E0 solid;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.recent-review-title{
+  margin-top: 2rem;
+}
+.wish-list-title .icon{
+  height: 30px;
+  width: 30px;
+  margin-right: 0.8rem;
+}
+.wish-list-item {
+  padding: 1rem ;
+  
+}
+
+.wish-list-item-each, .recent-review-item-each{
+  display: flex;;
+  padding: 0.5rem 0;
+  
+}
+.recent-review-item-each{
+  padding-left: 1rem;
+  border-bottom: 1px #E0E0E0 solid;
+  font-size: 0.8rem;
+}
+.recent-review-item-each:last-child{
+  border-bottom: none;
+}
+.wish-list-item-each div:last-child, .recent-review-item-each div:last-child{
+  margin-left: 2rem;;
+  
+}
+
+.wish-list-item-each div:first-child{
+  height: 25px;
+  width: 25px;
+  text-align: center;
+}
+
+.wish-list-item .wish-list-item-each:nth-child(1) div:first-child{
+  background-color: #4ca3dd;
+  color: white;
+}
+
+.wish-list-item .wish-list-item-each:nth-child(3) div:first-child{
+  background-color: #faebd7;
+  color: white;
+}
+
+.wish-list-item .wish-list-item-each:nth-child(2) div:first-child{
+  background-color: #f08080;
+  color: white;
+}
+
+.recent-review-item-each div:first-child{
+  margin-top: 0.15rem;
+  font-size: 0.6rem;
+}

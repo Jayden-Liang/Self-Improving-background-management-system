@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         showModal: false,
-        showdailyNote: false
+        showdailyNote: false,
+        // activeBanner: 'swiper-1'
         
     },
     mutations:{
@@ -23,11 +24,13 @@ export const store = new Vuex.Store({
     },
     actions:{
          ayncModal:({commit})=>{
-            //  setTimeout(()=>{
-            //      commit('modal')
-            //  }, 1000)
              commit('modal')
              commit('dailynote')
-         }
+         },
+        //  swiper:({commit})=>{
+        //      setInterval(()=>{
+
+        //      },2000)
+        //  }
     }
 })

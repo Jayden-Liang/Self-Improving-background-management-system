@@ -41,10 +41,10 @@ module.exports = {
          test:/\.(ttf|otf|eot|woff|woff2|svg)$/,
          use:['file-loader']
       },
-      {
-          test: /\.css$/,
-          use:['style-loader','css-loader']
-      }
+      // {
+      //     test: /\.css$/,
+      //     use:['style-loader','css-loader']   这里不注释掉使用element ui会报错
+      // }
     ]
   },
   resolve: {

@@ -1,7 +1,7 @@
 <template>
-    <div class='card' > 
+    <div class='my-card' > 
         <nav class='navBar'>
-            <div>Memory card</div>
+            <div class='cardTitle'>Memory card</div>
             <ul>
                 <li>数据统计</li>
                 <li>添加</li>
@@ -14,9 +14,9 @@
             </transition>
          </div>
            
-       <div class='slogan'>
+       <!-- <div class='slogan'>
           <h1>温故而知新</h1>
-       </div>
+       </div> -->
     </div>
 </template>
 
@@ -83,7 +83,10 @@ export default {
     flex: 2;
     text-align: center;
     margin-top: 30px;
-    font-size: 1.6rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1px;
 }
 .navBar ul{
     flex: 1;
@@ -96,7 +99,7 @@ export default {
  color: white;
 
 }
-.card{
+.my-card{
     margin-top: 0;
     margin-left: 300px;
     background-size: cover;
