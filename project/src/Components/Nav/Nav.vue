@@ -2,6 +2,10 @@
   <nav class="navbar">
     <div class="loginBtn">
       <button @click="login" data-toggle="modal" data-target="#exampleModalCenter">登录</button>
+      <button ><router-link to='/movie-bg'>          
+          后台
+</router-link>
+     </button>
     </div>
     <el-button icon="el-icon-search" circle></el-button>
     <!-- Modal -->
@@ -73,6 +77,10 @@ export default {
  },
   methods: {
     login() {}
+  },
+  backstage(){
+    console.log('fuck')
+    this.$router.push("/movie-bg").catch(err => {})
   }
 };
 </script>
@@ -83,7 +91,9 @@ export default {
 .navbar {
   height: 50px;
   background: #292525;
-  position: relative;
+  position: fixed;
+  z-index: 50000;
+  width: 100%;
 }
 
 .loginBtn {

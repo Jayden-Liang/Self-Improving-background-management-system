@@ -5,6 +5,8 @@ import VueRouter from 'vue-router'
 import { routes } from './router'
 import { store } from './store/store'
 import CKEditor from 'ckeditor4-vue';
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -14,7 +16,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.component('side-bar', SideBar);
 Vue.use(VueRouter);
 Vue.use( CKEditor );
-
+Vue.use(mavonEditor)
 Vue.use(ElementUI);
 
 

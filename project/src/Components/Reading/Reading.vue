@@ -1,8 +1,13 @@
 <template>
   <div class="reading">
+    <nav class='navbar sticky-top'>
+      <ul class='navbar-nav ml-auto'>
+        <li class="nav-item"><button @click='naviToBg' class="btn btn-outline-success  my-sm-0" type="submit">后台</button></li>
+      </ul>
+    </nav>
     <!-- <Modal :showModal="showModal" /> -->
-
-    <div class="data-display">
+    <main>
+        <div class="data-display">
       <div class="summary">
         <div>
           <button
@@ -103,6 +108,8 @@
         </div>
       </div>
     </div>
+    </main>
+    
   </div>
 </template>
 
@@ -191,6 +198,9 @@ export default {
         this.selectedCmp = "ReadList";
         this.buttonText = "已读";
       }
+    },
+    naviToBg(){
+      this.$router.push('/reading-bg').catch(err => {})
     }
 
   },

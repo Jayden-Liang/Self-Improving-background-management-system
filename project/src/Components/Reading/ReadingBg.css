@@ -1,0 +1,112 @@
+.all{
+    margin-left: 300px;
+}
+
+
+.readingBg nav{
+    height: 50px;
+    width: 100%;;
+    background: #4c7093;
+}
+
+.navbar .btn-outline-success{
+    margin-right: 100px;
+}
+
+.banner{
+    height: 200px;
+    background: url('../../assets/reading-banner.png');
+    /* background-size: contain; */
+}
+.banner h1{
+    width: 300px;
+    margin: auto;
+    color: white;
+    padding-top: 70px;
+    font-size: 350%;
+    letter-spacing: 10px;
+
+}
+
+.catagory{
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #420420;
+  padding: 1.3rem;
+  border-bottom: 1px #cccc solid;
+}
+
+
+.wish-booklist{
+    background: #FFFFFF;
+    margin-top: 3rem;
+    
+}
+
+.wish-booklist-detail,.reading-booklist-detail{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;    
+}
+
+.reading-booklist-detail .each, .wish-booklist-detail .each{
+    /* border: 1px red solid; */
+    width: 180px;
+    margin-top: 1.5rem;
+
+}
+.reading-booklist-detail a, .wish-booklist-detail a{
+   text-decoration: none;
+   color: #133337;
+}
+.each img{
+    /* height: 300px; */
+    width: 150px;
+    height: 200px;
+    margin: auto;
+    display: block;
+    /* border: 1px red solid; */
+}
+
+.book-name, .book-author{
+    width: 150px;
+    margin-left: 13px;
+    font-size: 0.8rem;
+}
+.book-name{
+    margin-top: 0.5rem;
+}
+
+.curent-booklist{
+    background: #FFFFFF;
+    margin-top: 2rem;
+}
+
+.new-article{
+    
+}
+
+
+.article-content{
+    padding: 2rem;
+    border: 1px #ccc solid;
+    margin: 1rem;
+    font-size: 0.8rem;
+}
+.content-title{
+    font-size: 1rem;
+    color:#000099
+    ;
+}
+
+.from-book{
+    margin: 0.5rem 0;
+}
+
+footer{
+    margin-top: 5rem;
+    border-top: 1px #ccc dotted;
+    font-size: 0.7rem;
+    padding: 1rem;
+    color: #ccc;
+}

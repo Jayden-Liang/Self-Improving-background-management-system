@@ -1,12 +1,23 @@
-.reading{ 
+
+
+main{
     margin-left: 300px;
-    margin-right: 290px;
-    
+}
+
+.reading nav{
+    height: 50px;
+    width: 100%;;
+    background: #4c7093;
+}
+
+.navbar .btn-outline-success{
+    margin-right: 100px;
 }
 
 .data-display{
     margin-top: 1rem;
     margin-left: 2rem;
+     margin-right: 290px;
    
 }
 
@@ -53,7 +64,7 @@
     
     /* flex-basis: 300px; */
     position: absolute;
-    top: 0px;
+    top: 55px;
     right: 10px;
     height: 99vh;
     margin-left: 2rem;
