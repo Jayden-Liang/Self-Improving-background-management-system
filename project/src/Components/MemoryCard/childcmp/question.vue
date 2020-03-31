@@ -1,12 +1,10 @@
 
 <template>
    <div class='each'>
-           <!-- <transition name='rotate' mode='out-in'> -->
-           <!-- <component :is='currentCmp'></component> -->
-           <!-- </transition> -->
            <div class='question'>
            <h3>问题一</h3>
-            添加背景图片backgound-image
+           <div>跨域解决方案 </div>
+            
           </div>
 
            <div class='answer'>
@@ -18,7 +16,7 @@
 
 <script>
 export default {
-    props:['callback'],
+    props:['callback', 'parentData'],
     methods:{
         changeCmp(){
             this.callback('answer')
@@ -65,5 +63,7 @@ export default {
 .button:hover{
     background: #6DFD9C;
 }
+
+
 </style>
 

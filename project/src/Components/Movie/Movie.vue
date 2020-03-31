@@ -3,7 +3,7 @@
     
     <navBar/>
     <main>
-          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval='3000'>
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -130,6 +130,21 @@ export default {
 </script>
 
 <style scoped>
-@import './Movie.css'
+@import './Movie.css';
+
+ main{
+    margin-left: 300px;
+    padding-top: 50px;
+  }
+
+.catagory{
+  margin-top: 50px;
+}
+.catagory div:last-child{
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  color: #800080;
+}
 
 </style>

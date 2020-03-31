@@ -74,7 +74,7 @@
       <div>卡片</div>
     </div>
     
-    <div class="each" @click="navigateToNote">
+    <!-- <div class="each" @click="navigateToNote">
       <div>
         <svg
           t="1580827789110"
@@ -127,7 +127,7 @@
         </svg>
       </div>
       <div>笔记</div>
-    </div>
+    </div> -->
   </div>
 </template>
 

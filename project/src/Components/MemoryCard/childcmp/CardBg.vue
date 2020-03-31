@@ -1,39 +1,34 @@
 <template>
-  <div class="my-card">
-     <cardNav/>
+  <div>
+    <cardNav />
+    <div class="main">
+      <div class="cardiv" v-for="(item,index) in cardData" :key="index">
+            <questionAnswer :item='item'/>
+      </div>
 
-    <main>
-      <div class="cardiv">
-      <transition name="rotate" mode="out-in">
-        <component :is="currentCmp" :callback="shiftCmp"></component>
-      </transition>
     </div>
-
-    <!-- <div class='slogan'>
-          <h1>温故而知新</h1>
-    </div>-->
-    
-
-    
-    </main>
   </div>
 </template>
 
 <script>
-import question from "./childcmp/question.vue";
-import answer from "./childcmp/answer.vue";
-import cardNav from './childcmp/cardNav.vue'
+import questionAnswer from './question-answer.vue'
+import cardNav from "./cardNav.vue";
+import question from "./question.vue";
+import answer from "./answer.vue";
 
 export default {
   components: {
     question,
     answer,
-    cardNav
+    cardNav,
+    questionAnswer
   },
   data: function() {
     return {
       currentCmp: "question",
       buttonText: "答案",
+      cardData: { question: "1", answer: "2" },
+      activeName: '1'
     };
   },
   methods: {
@@ -45,13 +40,25 @@ export default {
         this.currentCmp = "question";
         this.buttonText = "答案";
       }
-    },
-    
+    }
+  },
+  created() {
+    const axios = require("axios");
+    axios
+      .get("http://hit-the-road.cc/api/memoryCard")
+      .then(res => {
+        this.cardData = res.data;
+        console.log(this.cardData);
+      })
+      .catch(error => {
+        this.$message.error(error);
+      });
   }
 };
 </script>
 
-<style  scoped>
+
+<style scoped>
 .rotate-enter-active {
   animation: jump-in 0.3s ease-out forwards;
 }
@@ -77,30 +84,19 @@ export default {
   }
 }
 
-
 .my-card {
   margin-top: 0;
   background-size: cover;
 }
 
-
-main{
+.main {
   margin-left: 300px;
+  margin-top: 50px;
+  display: flex;
+
 }
 
 .cardiv {
-  /* border: 1px red solid; */
-  min-height: 300px;
+  margin-left: 2rem;
 }
-
-.slogan {
-  text-align: center;
-  font-family: "lixukexingshu1f8ea482aa1e86d";
-  margin-top: 5rem;
-  letter-spacing: 10px;
-  font-size: 4rem;
-}
-
-
 </style>
-

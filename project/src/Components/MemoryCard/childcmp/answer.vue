@@ -1,12 +1,10 @@
 <template>
 
 <div class='each'>
-           <!-- <transition name='rotate' mode='out-in'> -->
-           <!-- <component :is='currentCmp'></component> -->
-           <!-- </transition> -->
+
            <h3>正确答案</h3>
           <div>
-            bla bla bla
+           bla bla bla
           </div>
 
            <div class='answer'>
@@ -18,7 +16,7 @@
 
 <script>
 export default {
-    props:['callback'],
+    props:['callback', 'parentData'],
     methods:{
         changeCmp(){
             this.callback('question')

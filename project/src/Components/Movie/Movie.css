@@ -1,10 +1,6 @@
 
   
-  main{
-    margin-left: 300px;
-    padding-top: 50px;
-  }
-
+ 
 
   
   .carousel-indicators li{
@@ -166,15 +162,7 @@
 /* .movie-intro:hover > .brief-inner{
     margin-left: 1rem;
 } */
-.catagory{
-  margin-top: 50px;
-}
-.catagory div:last-child{
-  display: inline-block;
-  position: relative;
-  top: 3px;
-  color: #800080;
-}
+
 .icon{
   height: 40px;
   width: 40px;

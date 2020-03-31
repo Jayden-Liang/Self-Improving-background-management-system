@@ -1,6 +1,8 @@
 <template>
   <div class="movie-backstage">
-    <el-table
+     <navBar/>
+    <div class='main'>
+         <el-table
       ref="multipleTable"
       :data="tableData"
       tooltip-effect="dark"
@@ -25,13 +27,18 @@
     <div class='pagination'>
       <el-pagination @next-click='nextclick' layout="prev, pager, next" :total="20"></el-pagination>
     </div>
+    </div>
     
   </div>
 </template>
 
 <script>
 import { allMovies } from "../../assets/data/movie.js";
+import navBar from '../Nav/Nav.vue';
 export default {
+  components:{
+     navBar
+  },
   data() {
     return {
       tableData: [],
@@ -89,9 +96,11 @@ export default {
 
 
 <style scoped>
-.movie-backstage {
-  margin-left: 300px;
-  margin-top: 3rem;
+
+
+.main{
+   margin-left: 300px;
+  
 }
 
 
