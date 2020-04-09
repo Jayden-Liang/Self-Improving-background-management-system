@@ -5,7 +5,6 @@
         <li class="nav-item"><button @click='naviToBg' class="btn btn-outline-success  my-sm-0" type="submit">后台</button></li>
       </ul>
     </nav>
-    <!-- <Modal :showModal="showModal" /> -->
     <main>
         <div class="data-display">
       <div class="summary">
@@ -13,8 +12,7 @@
           <button
             type="button"
             class="btn btn-primary checkout"
-            data-toggle="modal"
-            data-target="#exampleModalCenter"
+            @click="ModalShow"
           >打卡</button>
           
         </div>
@@ -32,12 +30,15 @@
           </div>
         </div>
       </div>
-      <div class="chart-pic">
-        <div class="readingChart" style="width: 35rem; height: 22rem;">
-          <canvas id="myChart"></canvas>
+      <div class="chart">
+        <div class="line">
+          
         </div>
         <div class="pie">
-          <canvas id="pie-chart"></canvas>
+         
+        </div>
+        <div class='bar'>
+
         </div>
       </div>
 
@@ -61,26 +62,13 @@
       </transition>
     </div>
 
-
-    <!-- Modal -->
-      <div
-        class="modal fade"
-        id="exampleModalCenter"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">今日阅读</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="block mt-2">
+    <Modal :show="showModal" @modalReset='showModal=$event'>
+      <div class='my-modal'>
+           <div class='Modal-header'>
+               <h5>今日阅读</h5>
+           </div>
+           <div class='Modal-body'>
+             <div class="block mt-2">
                 <el-date-picker v-model="value1" type="date" placeholder="选择日期"></el-date-picker>
               </div>
               <el-input
@@ -99,14 +87,14 @@
                   :value="item.value"
                 ></el-option>
               </el-select>
-            </div>
-            <div class="modal-footer">
-              <el-button plain data-dismiss="modal">取消</el-button>
+           </div>
+           <div class="modal-footer">
+              <el-button plain @click="ModalHide">取消</el-button>
               <el-button type="success" plain data-dismiss="modal">提交</el-button>
             </div>
-          </div>
-        </div>
       </div>
+    </Modal>
+
     </div>
     </main>
     
@@ -114,24 +102,28 @@
 </template>
 
 <script>
-import Chart from "chart.js";
+import {LineCart, barCart, pieCart} from "./charts.js";
+import { readingBooks } from "../../assets/data/books.js";
 import ReadList from "./Cmp/ReadList.vue";
 import UnreadList from "./Cmp/UnreadList.vue";
 import dailyNote from "./Cmp/dailyNote.vue";
+import Modal from '../../UI/Modal.vue'
 
 export default {
   components: {
     ReadList: ReadList,
     UnreadList: UnreadList,
-    dailyNote
+    dailyNote,
+    Modal
   },
   data: function() {
     return {
       selectedCmp: "ReadList",
+      showModal: false,
       buttonText: "已读",
-      showModal: true,
       addNote: true,
       name: "",
+      readingBooks: '',
       pickerOptions: {
         disabledDate(time) {
           return time.getTime() > Date.now();
@@ -162,26 +154,7 @@ export default {
         ]
       },
       options: [
-        {
-          value: "选项1",
-          label: "美国众神"
-        },
-        {
-          value: "选项2",
-          label: "三国演义(听书)"
-        },
-        {
-          value: "选项3",
-          label: "思考.快与慢"
-        },
-        {
-          value: "选项4",
-          label: "盐糖脂"
-        },
-        {
-          value: "选项5",
-          label: "半小时漫画经济学"
-        }
+        
       ],
       value: "美国众神",
       value1: "",
@@ -201,78 +174,48 @@ export default {
     },
     naviToBg(){
       this.$router.push('/reading-bg').catch(err => {})
+    },
+    ModalShow(){
+      this.showModal=true
+    },
+    ModalHide(){
+      this.showModal=false
     }
 
   },
-  mounted() {
-    let myChart = document.querySelector("#myChart").getContext("2d");
-    //Global Options 全局设置
-    Chart.defaults.global.defaultFontFamily = "Lato"; //设置字体
-    Chart.defaults.global.defaultFontSize = 12; //设置字体大小
-    Chart.defaults.global.defaultFontColor = "#777"; //设置字体颜色
-    let massPopChart = new Chart(myChart, {
-      type: "line", //bar, horizontalBar, pie,line, doughnut, radar, polarArea 可以是不同的图表
-      data: {
-        //数据存放的地方
-        labels: [
-          "一月",
-          "二月",
-          "三月",
-          "四月",
-          "五月",
-          "六月",
-          "七月",
-          "八月",
-          "九月",
-          "十月",
-          "十一月",
-          "十二月"
-        ],
-        datasets: [
-          {
-            label: "数量/本",
-            data: ["2", "4", "2", "3", "5"],
-            // backgroundColor: 'yellow',
-
-            borderWidth: 1,
-            borderColor: "#777",
-            hoverBorderWidth: "2",
-            hoverBorderColor: "#800080"
-          }
-        ]
-      },
-      options: {}
-    });
-    //-----------------------------------------------------------------------------labels:['小说','经济','思维与认知','心理']
-    let pieChart = document.querySelector("#pie-chart").getContext("2d");
-    var myPieChart = new Chart(pieChart, {
-      type: "doughnut",
-      data: {
-        //数据存放的地方
-        labels: ["小说", "经济", "思维与认知", "心理"],
-        datasets: [
-          {
-            label: "数量/本",
-            data: ["2", "4", "2", "3"],
-            backgroundColor: ["#FF6384", "#FFCD56", "#36A2EB", "#40e0d0"],
-            borderWidth: 1,
-            hoverBorderColor: "#800080"
-          }
-        ]
-      },
-      options: {
-        legend: {
-          position: "right"
+  created(){
+     const axios = require("axios");
+     axios
+      .get("http://hit-the-road.cc/api/readingList")
+      .then(res => {
+        this.readingList = res.data;
+        console.log(this.readingList);
+      })
+      .catch(error => {
+        this.$message.error(error);
+      });
+  },
+  mounted(){
+    LineCart()
+    barCart()
+    pieCart()
+    this.readingBooks=readingBooks()
+    this.options=this.readingBooks.map((item,index)=>{index
+        return {
+          value: '选项'+(index+1),
+          label: item.name
         }
-      }
-    });
+    })
+
   }
 };
 </script>
 
 <style scoped>
 @import "./Reading.css";
-<style > .slide-enter {
+
+
+.slide-enter {
   opacity: 0;
 }
 .slide-enter-active {
@@ -302,5 +245,18 @@ export default {
           transform: translateX(100px);
       }
   } */
+
 </style>
+
+<style >
+.my-modal{
+  
+  padding: 2rem;
+  
+}
+
+.modal-footer{
+  border-top: none;
+}
 </style>
+

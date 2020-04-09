@@ -79,15 +79,19 @@ main{
 
 }
 
-.chart-pic{
+.chart{
    display: flex;
+   justify-content: space-evenly;
    margin-top: 1.5rem;
    background: white;
+   padding: 1rem;
 }
 
-.pie{
-   margin-top:6rem;
-   margin-left: 3rem;
+.pie, .line, .bar{
+
+   width: 30%;
+   height: 250px;
+   background-color: #f0f8ff;
 }
 
 #myChart{

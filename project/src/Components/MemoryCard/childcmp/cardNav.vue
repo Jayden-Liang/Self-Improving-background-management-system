@@ -50,6 +50,7 @@ export default {
         .catch(_ => {});
     },
     submitData() {
+      console.log(this.form)
       const axios = require("axios");
       axios
         .post("http://hit-the-road.cc/api/memoryCard", this.form)

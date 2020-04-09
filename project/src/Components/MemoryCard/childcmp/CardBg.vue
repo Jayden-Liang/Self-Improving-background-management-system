@@ -93,6 +93,7 @@ export default {
   margin-left: 300px;
   margin-top: 50px;
   display: flex;
+  flex-wrap:wrap;
 
 }
 

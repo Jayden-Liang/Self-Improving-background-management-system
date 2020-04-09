@@ -15,6 +15,7 @@
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "ckeditor4-vue": "^0.2.0",
+    "echarts": "^4.7.0",
     "element-ui": "^2.13.0",
     "jquery": "^3.4.1",
     "mavon-editor": "^2.7.7",
