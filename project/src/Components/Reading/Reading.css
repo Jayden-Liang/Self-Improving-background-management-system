@@ -63,7 +63,7 @@ main{
 .booklist{
     
     /* flex-basis: 300px; */
-    position: absolute;
+    position: fixed;
     top: 55px;
     right: 10px;
     height: 99vh;
@@ -111,7 +111,11 @@ main{
     border-radius: 8px;
     font-size: 80%;
     position: relative;
+    margin-bottom: 3rem;
 }
+
+    
+
 
 .date-today{
     margin-bottom: 0.8rem;

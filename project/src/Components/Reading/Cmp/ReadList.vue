@@ -12,8 +12,9 @@
 </template>
 
 <style scoped>
-.read{
+/* .read{
     
-    height: 99vh;
-}
+    position: fixed;
+    height: 100%;
+} */
 </style>

@@ -8,7 +8,7 @@
         leave-class=''
         leave-active-class='animated rotateOut'
      >
-        <div class='modal-content'  v-if='show'>
+        <div class='modalContent'  v-if='show'>
             <slot></slot>
         </div>
        </transition>
@@ -41,7 +41,7 @@ export default {
 </style>
 
 <style>
-.modal-content{
+.modalContent{
     background: white;
     position: absolute;
     top: 300px;

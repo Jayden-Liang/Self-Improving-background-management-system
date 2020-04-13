@@ -1,7 +1,8 @@
 <template>
     <div class='moviePost'>
         <navBar/>
-        <div class='header'>
+        <div class='movie-main'>
+            <div class='header'>
             <div class='header-img'></div>
         </div>
         <div class='main'>
@@ -12,6 +13,8 @@
             </div>
             
         </div>
+        </div>
+        
     </div>
 </template>
 
@@ -29,7 +32,7 @@ export default {
 </script>
 
 <style scoped>
-.moviePost{
+.movie-main{
     margin-left: 300px;
 }
 

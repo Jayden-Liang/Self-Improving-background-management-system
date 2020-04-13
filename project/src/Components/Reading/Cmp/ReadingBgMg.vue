@@ -1,11 +1,12 @@
 <template>
   <div class="bg-management">
-    <div class="bg-info my-banner">
+    <div class='section1'>
+        <div class="bg-info my-banner">
       <div class="text-white p-3">想看的书</div>
       <el-button class="myAddbutton" size="mini" type="warning" @click="Form1show">添加</el-button>
     </div>
     <div>
-      <el-table :data="tableData1" style="width: 100%">
+      <el-table :data="tableData1"  v-loading="loading1" style="width: 100%">
         <el-table-column label="封面" width="200">
           <template slot-scope="scope">
             <span style="margin-left: 10px">
@@ -30,8 +31,8 @@
         <el-table-column label="操作" class="my-operation">
           <template slot-scope="scope">
             <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">标记</el-button>
-            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            <el-button size="mini" type="danger" @click="handleMark(scope.$index, scope.row)">标记</el-button>
+            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row, 'table1')">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -44,6 +45,8 @@
         @current-change="handleCurrentChange1($event,2)"
       ></el-pagination>
     </div>
+    </div>
+    
     <div class="bg-success mt-4 my-banner">
       <div class="text-white p-3">在看的书</div>
       <el-button
@@ -53,7 +56,7 @@
         @click="Form2show"
       >添加</el-button>
     </div>
-    <el-table :data="tableData2" style="width: 100%">
+    <el-table :data="tableData2"  v-loading="loading2" style="width: 100%">
       <el-table-column label="封面" width="200">
         <template slot-scope="scope">
           <span style="margin-left: 10px">
@@ -80,8 +83,8 @@
       <el-table-column label="操作" class="my-operation">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">标记</el-button>
-          <el-button size="mini" type="danger">删除</el-button>
+          <el-button size="mini" type="danger" @click="handleMark(scope.$index, scope.row)">标记</el-button>
+          <el-button size="mini" @click='handleDelete(scope.$index, scope.row,"table2")' type="danger">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -177,7 +180,7 @@
         leave-class=''
         leave-active-class='animated bounceOutRight'
      >
-      <div class="wish-list-add" v-if="showForm2">
+      <div class="reading-list-add" v-if="showForm2">
         <i @click='cancelForm2' class="el-icon-circle-close"></i>
         <form class='form1'>
           <div class="form-group row">
@@ -214,7 +217,7 @@
                 <input type="text" v-model="form2.tags[0]" class="form-control tag-add" />
                 <el-button
                   type="primary"
-                  @click="tagAdd"
+                  @click="tagAdd2"
                   class="tag-add-button"
                   icon="el-icon-plus"
                   circle
@@ -228,7 +231,7 @@
 
           <div class="form-group row">
             <div class="col-sm-10">
-              <button @click.prevent="submitForm1" class="btn btn-primary">提交</button>
+              <button @click.prevent="submitForm2" class="btn btn-primary">提交</button>
             </div>
           </div>
         </form>
@@ -239,10 +242,16 @@
 
 
 <script>
-import { wishBooks } from "../../../assets/data/books.js";
-import { readingBooks } from "../../../assets/data/books.js";
 
+const axios = require("axios");
 
+function clearForm(form){
+   form.name=''
+   imgUrl= "",
+   tags= [],
+   author= "",
+   introduction= ""
+}
 
 export default {
   data: function(){
@@ -251,6 +260,8 @@ export default {
       mycurrentReading: "",
       tableData1: [],
       tableData2: [],
+      loading1: true,
+      loading2: true,
       pageLength1: 0,
       pageLength2: 0,
       showForm1: false,
@@ -277,8 +288,33 @@ export default {
     handleEdit(index, row) {
       console.log(index, row);
     },
-    handleDelete(index, row) {
-      console.log(index, row);
+    handleDelete(index, row, whichTable) {
+      if (whichTable=='table1'){
+          let delIndex= this.tableData1.findIndex((val)=>{
+            return val.id==row.id
+          })
+          this.tableData1.splice(delIndex, 1)
+          this.pageLength1-=1
+      }
+      if (whichTable=='table2'){
+         let delIndex= this.tableData2.findIndex((val)=>{
+            return val.id==row.id
+          })
+          this.tableData2.splice(delIndex, 1)
+          this.pageLength2-=1
+      }
+      
+      axios.post('http://hit-the-road.cc/api/readingList/delete',{"id": row.id})
+      .then(res => {
+        this.$message({
+          message: '删除成功',
+          type: 'success'
+        });
+  
+      })
+      .catch(error => {
+        this.$message.error(error);
+      });
     },
     handleCurrentChange1(index) {
       this.tableData1 = this.mywishBooks.slice(
@@ -294,6 +330,9 @@ export default {
     },
     tagAdd() {
       this.form1Tag += 1;
+    },
+    tagAdd2(){
+      this.form2Tag+=1
     },
     Form1show() {
       this.showForm1=true
@@ -313,16 +352,50 @@ export default {
       axios
       .post("http://hit-the-road.cc/api/readingList", this.form1)
       .then(res => {
-        console.log(res)
+        this.$message({
+          message: '添加成功',
+          type: 'success'
+        });
   
       })
       .catch(error => {
         this.$message.error(error);
       });
+      this.showForm1=false
+      this.form2={
+        name: "",
+        imgUrl: "",
+        tags: [],
+        author: "",
+        introduction: ""
+      }
     },
     tagChange() {
       console.log("changed");
-    }
+    },
+    submitForm2() {
+       axios
+      .post("http://hit-the-road.cc/api/readingList/current-reading", this.form2)
+      .then(res => {
+  
+        this.$message({
+          message: '添加成功',
+          type: 'success'
+        });
+  
+      })
+      .catch(error => {
+        this.$message.error(error);
+      });
+      this.showForm2=false
+      this.form2={
+        name: "",
+        imgUrl: "",
+        tags: [],
+        author: "",
+        introduction: ""
+      }
+  }
   },
   computed: {},
   mounted() {
@@ -332,10 +405,26 @@ export default {
       .then(res => {
         this.mywishBooks = res.data;
         this.pageLength1 = res.data.length;
+        this.loading1=false
         if (res.data.length>5){
           this.tableData1=res.data.slice(0,5)
         }else{
            this.tableData1=res.data
+        }
+      })
+      .catch(error => {
+        this.$message.error(error);
+      });
+    axios
+      .get("http://hit-the-road.cc/api/readingList/current-reading")
+      .then(res => {
+        this.mycurrentReading = res.data;
+        this.pageLength2 = res.data.length;
+        this.loading2=false
+        if (res.data.length>5){
+          this.tableData2=res.data.slice(0,5)
+        }else{
+           this.tableData2=res.data
         }
         console.log(res.data)
       })
@@ -343,16 +432,9 @@ export default {
         this.$message.error(error);
       });
 
-    //   this.mycurrentReading = readingBooks();
-    // console.log(this.mywishBooks)
-    // this.tableData1 =this.mywishBooks.slice(0, 5);
-    // this.tableData2 = this.mycurrentReading.slice(0, 5);
-    // this.pageLength1 = books.length;
-    // this.pageLength2 = this.mycurrentReading.length;
   }
   
-    // let books = wishBooks();
-    
+
     
 };
 </script>
@@ -365,6 +447,9 @@ export default {
   height: 105vh;
 }
 
+.section1 .el-table{
+  height: 600px;
+}
 .el-img {
   width: 50px;
   height: 80px;
@@ -394,6 +479,18 @@ export default {
   
 }
 
+ .reading-list-add{
+  z-index: 100;
+  width: 500px;
+  padding: 1.5rem;
+  position: absolute;
+  background: white;
+  box-shadow: 1px 1px 10px #eeeeee;
+  top: 700px;
+  left: 800px;
+  font-size: 0.7rem;
+}
+
 .form1{
   margin-top: 3rem;
 }
@@ -411,7 +508,7 @@ export default {
   font-size: 6px;
 }
 
-.wish-list-add .el-icon-circle-close{
+.wish-list-add .el-icon-circle-close, .reading-list-add .el-icon-circle-close{
   position: absolute;
   font-size: 2rem;
   right: 10px;

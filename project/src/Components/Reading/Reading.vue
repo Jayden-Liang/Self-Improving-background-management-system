@@ -17,7 +17,7 @@
           
         </div>
         
-        <div class="finished-task">
+        <div class="finished-task" @click="naviToBg">
           <div>
             <div class="word">已读</div>
             <div class="num">2/30</div>
@@ -42,11 +42,11 @@
         </div>
       </div>
 
-      <div class="daily-say">
-        <div class="daily-each">
-          <div class="date-today">2020-03-02</div>
-          <div class="daily-note">今天看到第五章节，对思考关于人的大脑的探索很有趣。</div>
-          <div class="daily-book">《思考.快与慢》</div>
+      <div class="daily-say" v-loading="loading" >
+        <div class="daily-each" v-for='(item, index) in notes' :key='index'>
+          <div class="date-today">{{item.date}}</div>
+          <div class="daily-note">{{ item.content }}</div>
+          <div class="daily-book">-{{item.book}}</div>
         </div>
       </div>
 
@@ -69,17 +69,17 @@
            </div>
            <div class='Modal-body'>
              <div class="block mt-2">
-                <el-date-picker v-model="value1" type="date" placeholder="选择日期"></el-date-picker>
+                <el-date-picker v-model="noteForm.date" type="date" placeholder="选择日期"></el-date-picker>
               </div>
               <el-input
                 class="mt-4"
                 type="textarea"
                 :autosize="{ minRows: 2, maxRows: 4}"
                 placeholder="请输入内容"
-                v-model="textarea2"
+                v-model="noteForm.content"
               ></el-input>
 
-              <el-select class="mt-4" v-model="value" placeholder="请选择">
+              <el-select class="mt-4" v-model="noteForm.book" placeholder="请选择">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -90,7 +90,7 @@
            </div>
            <div class="modal-footer">
               <el-button plain @click="ModalHide">取消</el-button>
-              <el-button type="success" plain data-dismiss="modal">提交</el-button>
+              <el-button type="success" plain @click="submitDailyNote">提交</el-button>
             </div>
       </div>
     </Modal>
@@ -103,11 +103,13 @@
 
 <script>
 import {LineCart, barCart, pieCart} from "./charts.js";
-import { readingBooks } from "../../assets/data/books.js";
+
 import ReadList from "./Cmp/ReadList.vue";
 import UnreadList from "./Cmp/UnreadList.vue";
 import dailyNote from "./Cmp/dailyNote.vue";
 import Modal from '../../UI/Modal.vue'
+const axios = require("axios");
+
 
 export default {
   components: {
@@ -124,6 +126,8 @@ export default {
       addNote: true,
       name: "",
       readingBooks: '',
+      notes: [],
+      loading: true,
       pickerOptions: {
         disabledDate(time) {
           return time.getTime() > Date.now();
@@ -156,10 +160,12 @@ export default {
       options: [
         
       ],
-      value: "美国众神",
-      value1: "",
-      value2: "",
-      textarea2: ""
+      noteForm:{
+        date: '',
+        content: '',
+        book:''
+
+      },
     };
   },
   methods: {
@@ -180,16 +186,35 @@ export default {
     },
     ModalHide(){
       this.showModal=false
+    },
+    submitDailyNote(){
+      const axios = require("axios");
+      let formData=this.noteForm
+      let myDate = new Date(formData.date)
+      formData.date=(`${myDate.getFullYear()}-${myDate.getMonth()+1}-${myDate.getDate()}`)
+      console.log(formData)
+      axios.post('http://hit-the-road.cc/api/dailyNote', formData)
+      .then(res=>{
+        console.log(res.data)
+        this.showModal=false,
+        this.noteForm={
+        date: '',
+        content: '',
+        book:''
+
+      }
+      })
+      .catch(error => {
+        this.$message.error(error);
+      });
     }
 
   },
   created(){
-     const axios = require("axios");
      axios
       .get("http://hit-the-road.cc/api/readingList")
       .then(res => {
         this.readingList = res.data;
-        console.log(this.readingList);
       })
       .catch(error => {
         this.$message.error(error);
@@ -199,13 +224,30 @@ export default {
     LineCart()
     barCart()
     pieCart()
-    this.readingBooks=readingBooks()
-    this.options=this.readingBooks.map((item,index)=>{index
+    axios
+      .get("http://hit-the-road.cc/api/readingList/current-reading")
+      .then(res => {
+        this.readingBooks= res.data;
+        this.options=this.readingBooks.map((item,index)=>{index
         return {
-          value: '选项'+(index+1),
+          value: item.name,
           label: item.name
         }
     })
+      })
+      .catch(error => {
+        this.$message.error(error);
+      });
+    axios
+      .get("http://hit-the-road.cc/api/dailyNote")
+      .then(res => {
+        this.notes= res.data;
+        this.loading=false
+      })
+      .catch(error => {
+        this.$message.error(error);
+      });
+    
 
   }
 };

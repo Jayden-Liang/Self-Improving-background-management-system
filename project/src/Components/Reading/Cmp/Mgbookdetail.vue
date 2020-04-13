@@ -4,7 +4,7 @@
         <div class='catagory'>
            想看的书
         </div>
-        <div class='wish-booklist-detail'>
+        <div class='wish-booklist-detail' v-loading="loading1">
              <a v-for="(item, index) in mywishBooks" href='#':key='index' class='each'>
                  <img :src="item.imgUrl" alt="">
                  <div class='book-name'>{{item.name}}</div>
@@ -16,7 +16,7 @@
         <div class='catagory reading-cata'>
            在看的书
         </div>
-        <div class='reading-booklist-detail'>
+        <div class='reading-booklist-detail' v-loading="loading2">
              <div v-for="(item, index) in mycurrentReading" :key='index' class='each'>
                  <img :src="item.imgUrl" alt="">
                  <div class='book-name'>{{item.name}}</div>
@@ -46,14 +46,16 @@
 
 
 <script>
-import { wishBooks } from '../../../assets/data/books.js'
-import { readingBooks } from '../../../assets/data/books.js'
+
+const axios = require("axios");
 
 export default {
     data: function(){
         return {
             mywishBooks: '',
-            mycurrentReading:''
+            mycurrentReading:'',
+            loading1: true,
+            loading1: true
         }
     },
     methods:{
@@ -62,9 +64,25 @@ export default {
      }
     },
     mounted(){
-        let books=wishBooks()
-        this.mycurrentReading=readingBooks()
-        this.mywishBooks= books
+        axios
+      .get("http://hit-the-road.cc/api/readingList")
+      .then(res => {
+        this.mywishBooks = res.data;
+        this.loading1=false
+      })
+      .catch(error => {
+        this.$message.error(error);
+      });
+    axios
+      .get("http://hit-the-road.cc/api/readingList/current-reading")
+      .then(res => {
+        this.mycurrentReading = res.data;
+        this.loading2=false
+      })
+      .catch(error => {
+        this.$message.error(error);
+      });
+
     }
 }
 </script>

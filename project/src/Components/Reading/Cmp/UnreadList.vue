@@ -15,7 +15,6 @@
 <style scoped>
 .read{
     
-    height: 99vh;
     /* overflow:scroll; */
 }
 
